@@ -6371,6 +6371,10 @@ class OverlayView: NSView {
             let btn = bottomStripView?.buttonViews.first { if case .effects = $0.action { return true }; return false }
             showEffectsPopover(anchorView: btn)
         case .beautify:
+            if UserDefaults.standard.bool(forKey: "disableBeautify") {
+                // User has globally disabled the Beautify feature in Settings.
+                break
+            }
             commitTextFieldIfNeeded()
             stampPreviewPoint = nil
             loupeCursorPoint = .zero
